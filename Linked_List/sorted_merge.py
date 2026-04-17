@@ -6,25 +6,21 @@ class ListNode(object):
 
 class Merged(object):
     def mergeTwoLists(self, list1, list2):
-        start = ListNode()
-        pointer = start
-
+        dummy = ListNode(0)
+        new_head = dummy
+        
         while list1 and list2:
             if list1.val < list2.val:
-                pointer.next = list1
+                new_head.next = list1
                 list1 = list1.next
             else:
-                pointer.next = list2
+                new_head.next = list2
                 list2 = list2.next
-            
-            pointer = pointer.next
+            new_head = new_head.next
+        
+        new_head.next = list1 if list1 else list2
 
-        if list1:
-            pointer.next = list1
-        else:
-            pointer.next = list2
-
-        return start.next
+        return dummy.next
 
 if __name__ == "__main__":
     head1 = ListNode(1)
